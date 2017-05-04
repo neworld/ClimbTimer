@@ -1,4 +1,4 @@
-package lt.neworld.climbtimer
+package lt.neworld.climbtimer.controllers
 
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -11,11 +11,11 @@ import javafx.stage.Stage
  * *
  * @since 2017-05-01
  */
-class MainController {
+class TimerController {
 
     companion object {
         fun newScene(): Scene {
-            val root: Parent = FXMLLoader.load(javaClass.getResource("main.fxml"))
+            val root: Parent = FXMLLoader.load(TimerController.javaClass.getResource("timer.fxml"))
             return Scene(root).apply {
                 setOnKeyPressed {
                     when (it.code) {
