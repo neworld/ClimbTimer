@@ -1,9 +1,6 @@
 package lt.neworld.climbtimer
 
 import javafx.application.Application
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-import javafx.scene.Scene
 import javafx.stage.Stage
 
 /**
@@ -12,9 +9,9 @@ import javafx.stage.Stage
  */
 class Main : Application() {
     override fun start(primaryStage: Stage) {
-        val root: Parent = FXMLLoader.load(javaClass.getResource("main.fxml"))
         primaryStage.title = "Climb timer"
-        primaryStage.scene = Scene(root, 600.0, 300.0)
+        primaryStage.scene = MainController.newScene()
+        primaryStage.isFullScreen = true
         primaryStage.show()
     }
 }
