@@ -25,7 +25,8 @@ class TimerController {
 
     private val timer = Timer(
             runTime = AppProperties.runTime,
-            waitTime = AppProperties.waitTime
+            waitTime = AppProperties.waitTime,
+            warningTime = AppProperties.warningTime
     )
     private var animationTimer: AnimationTimer? = null
 
@@ -50,7 +51,7 @@ class TimerController {
 
         val color = when (state.status) {
             Timer.Status.WAITING -> AppProperties.colorOfWaitTime
-            Timer.Status.RUNNING -> AppProperties.colorOfRunTime
+            Timer.Status.WARNING -> AppProperties.colorOfWarning
             else -> AppProperties.colorOfRunTime
         }
 

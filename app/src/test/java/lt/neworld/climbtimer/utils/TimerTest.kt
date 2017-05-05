@@ -3,8 +3,7 @@ package lt.neworld.climbtimer.utils
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import lt.neworld.climbtimer.utils.Timer.State
-import lt.neworld.climbtimer.utils.Timer.Status.RUNNING
-import lt.neworld.climbtimer.utils.Timer.Status.WAITING
+import lt.neworld.climbtimer.utils.Timer.Status.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.Clock
@@ -17,7 +16,8 @@ class TimerTest {
     val clock: Clock = mock()
     val runTime = 5000L
     val waitTime = 1000L
-    val fixture = Timer(runTime, waitTime, clock)
+    val warningTime = 1000L
+    val fixture = Timer(runTime, waitTime, warningTime, clock)
 
     @Test
     fun state_statEqualsIntervalAndStopped() {
@@ -75,5 +75,14 @@ class TimerTest {
         whenever(clock.millis()).thenReturn(runTime)
 
         assertEquals(State(WAITING, waitTime), fixture.state)
+    }
+
+    @Test
+    fun inTheWarning() {
+        fixture.start()
+
+        whenever(clock.millis()).thenReturn(runTime - warningTime)
+
+        assertEquals(State(WARNING, warningTime), fixture.state)
     }
 }

@@ -11,6 +11,7 @@ import java.time.Clock
 class Timer(
         private val runTime: Long,
         private val waitTime: Long,
+        private val warningTime: Long,
         private val clock: Clock = Clock.systemUTC()
 ) {
     private var started = false
@@ -32,9 +33,12 @@ class Timer(
                     left = runTime
                 }
 
-                if (left > waitTime) {
+                if (left > waitTime + warningTime) {
                     left -= waitTime
                     status = Status.RUNNING
+                } else if (left > waitTime) {
+                    left -= waitTime
+                    status = Status.WARNING
                 } else {
                     status = Status.WAITING
                 }
@@ -48,6 +52,6 @@ class Timer(
     data class State(val status: Status, val left: Long)
 
     enum class Status {
-        STOPPED, RUNNING, WAITING
+        STOPPED, RUNNING, WAITING, WARNING
     }
 }
