@@ -3,6 +3,7 @@ package lt.neworld.climbtimer
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.InputStreamReader
 import java.util.*
 import kotlin.reflect.KProperty
 
@@ -27,7 +28,7 @@ object AppProperties {
                 file.createNewFile()
             }
             val fin = FileInputStream(file)
-            load(fin)
+            load(InputStreamReader(fin))
             fin.close()
         }
     }
@@ -38,29 +39,49 @@ object AppProperties {
         fout.close()
     }
 
-    var runTime: Long by Field(PROP_RUN_TIME, 5 * 1000, String::toLong, Long::toString)
-    var waitTime: Long by Field(PROP_WAIT_TIME, 1 * 1000, String::toLong, Long::toString)
-    var warningTime: Long by Field(PROP_WARNING_TIME, 1 * 1000, String::toLong, Long::toString)
+    var runTime: Long by TimeField(PROP_RUN_TIME, 5 * 1000)
+    var waitTime: Long by TimeField(PROP_WAIT_TIME, 1 * 1000)
+    var warningTime: Long by TimeField(PROP_WARNING_TIME, 1 * 1000)
 
-    var title: String by Field(PROP_TITLE, "ClimbTimer", { it }, { it })
+    var title: String by StringField(PROP_TITLE, "ClimbTimer")
 
-    var colorOfRunTime: Int by Field(PROP_COLOR_OF_RUN_TIME, 0xFFFFFF, String::toInt, Int::toString)
-    var colorOfWaitTime: Int by Field(PROP_COLOR_OF_WAIT_TIME, 0x00FF00, String::toInt, Int::toString)
-    var colorOfWarning: Int by Field(PROP_COLOR_OF_WARNING_TIME, 0xFF0000, String::toInt, Int::toString)
+    var colorOfRunTime: Int by ColorField(PROP_COLOR_OF_RUN_TIME, 0xFFFFFF)
+    var colorOfWaitTime: Int by ColorField(PROP_COLOR_OF_WAIT_TIME, 0x00FF00)
+    var colorOfWarning: Int by ColorField(PROP_COLOR_OF_WARNING_TIME, 0xFF0000)
 
-    class Field<T>(
+    class TimeField(key: String, default: Long) : Field<Long>(key, default) {
+        override fun deserialize(raw: String): Long = raw.toLong() * 1000
+
+        override fun serialize(value: Long): String = (value / 1000).toString()
+    }
+
+    class StringField(key: String, default: String) : Field<String>(key, default) {
+        override fun deserialize(raw: String): String = raw
+
+        override fun serialize(value: String): String = value
+    }
+
+    class ColorField(key: String, default: Int) : Field<Int>(key, default) {
+        override fun deserialize(raw: String) = Integer.parseInt(raw, 16)
+
+        override fun serialize(value: Int) = "%06X".format(value)
+    }
+
+    abstract class Field<T>(
             val key: String,
-            val default: T,
-            val reader: (String) -> T,
-            val writer: (T) -> String
+            val default: T
     ) {
         operator fun getValue(thisRef: Any, property: KProperty<*>): T {
-            return properties.getProperty(key, null)?.let(reader) ?: default
+            return properties.getProperty(key, null)?.let(this::deserialize) ?: default
         }
 
         operator fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
-            properties[key] = value.let(writer)
+            properties[key] = value.let(this::serialize)
             save()
         }
+
+        abstract fun deserialize(raw: String): T
+
+        abstract fun serialize(value: T): String
     }
 }
