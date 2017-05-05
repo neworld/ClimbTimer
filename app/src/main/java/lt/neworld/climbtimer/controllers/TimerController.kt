@@ -21,7 +21,7 @@ import java.util.*
  * *
  * @since 2017-05-01
  */
-class TimerController: Initializable {
+class TimerController : Initializable {
 
     @FXML
     private lateinit var clock: Label
@@ -38,6 +38,7 @@ class TimerController: Initializable {
 
     override fun initialize(location: URL, resources: ResourceBundle?) {
         title.text = AppProperties.title
+        showTimer()
     }
 
     private fun start() {
