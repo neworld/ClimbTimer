@@ -3,6 +3,7 @@ package lt.neworld.climbtimer.controllers
 import javafx.animation.AnimationTimer
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
+import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
@@ -12,16 +13,21 @@ import javafx.stage.Stage
 import lt.neworld.climbtimer.AppProperties
 import lt.neworld.climbtimer.extensions.startAnimationTimer
 import lt.neworld.climbtimer.utils.Timer
+import java.net.URL
+import java.util.*
 
 /**
  * @author Andrius Semionovas
  * *
  * @since 2017-05-01
  */
-class TimerController {
+class TimerController: Initializable {
 
     @FXML
     private lateinit var clock: Label
+
+    @FXML
+    private lateinit var title: Label
 
     private val timer = Timer(
             runTime = AppProperties.runTime,
@@ -29,6 +35,10 @@ class TimerController {
             warningTime = AppProperties.warningTime
     )
     private var animationTimer: AnimationTimer? = null
+
+    override fun initialize(location: URL, resources: ResourceBundle?) {
+        title.text = AppProperties.title
+    }
 
     private fun start() {
         stop()

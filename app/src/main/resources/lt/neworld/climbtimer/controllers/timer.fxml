@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.TimerController">
    <center>
       <Label fx:id="clock" text="00:00:00" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
@@ -17,4 +16,14 @@
          </padding>
       </Label>
    </center>
+   <top>
+      <Label fx:id="title" text="Montis Magia" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="96.0" />
+         </font>
+         <padding>
+            <Insets left="50.0" right="50.0" />
+         </padding>
+      </Label>
+   </top>
 </BorderPane>
