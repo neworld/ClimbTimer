@@ -2,6 +2,9 @@ package lt.neworld.climbtimer.utils
 
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import lt.neworld.climbtimer.utils.Timer.State
+import lt.neworld.climbtimer.utils.Timer.Status.RUNNING
+import lt.neworld.climbtimer.utils.Timer.Status.WAITING
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.Clock
@@ -12,14 +15,15 @@ import java.time.Clock
  */
 class TimerTest {
     val clock: Clock = mock()
-    val interval = 5000L
-    val fixture = Timer(interval, clock)
+    val runTime = 5000L
+    val waitTime = 1000L
+    val fixture = Timer(runTime, waitTime, clock)
 
     @Test
     fun state_statEqualsIntervalAndStopped() {
         val status = fixture.state
 
-        assertEquals(Timer.State(Timer.Status.STOPPED, interval), status)
+        assertEquals(State(Timer.Status.STOPPED, runTime), status)
     }
 
     @Test
@@ -33,7 +37,8 @@ class TimerTest {
     fun start_leftShouldBeAsInterval() {
         fixture.start()
 
-        assertEquals(interval, fixture.state.left)
+        assertEquals(State(RUNNING, runTime), fixture.state)
+
     }
 
     @Test
@@ -42,24 +47,33 @@ class TimerTest {
 
         whenever(clock.millis()).thenReturn(1000)
 
-        assertEquals(interval - 1000, fixture.state.left)
+        assertEquals(State(RUNNING, runTime - 1000), fixture.state)
     }
 
     @Test
     fun afterInterval_leftShouldBeInterval() {
         fixture.start()
 
-        whenever(clock.millis()).thenReturn(interval)
+        whenever(clock.millis()).thenReturn(runTime + waitTime)
 
-        assertEquals(interval, fixture.state.left)
+        assertEquals(State(RUNNING, runTime), fixture.state)
     }
 
     @Test
     fun afterOneSecondAfterInterval_leftShouldBeOneSecondLessThanInterval() {
         fixture.start()
 
-        whenever(clock.millis()).thenReturn(interval + 1000)
+        whenever(clock.millis()).thenReturn(runTime + waitTime + 1000)
 
-        assertEquals(interval - 1000, fixture.state.left)
+        assertEquals(State(RUNNING, runTime - 1000), fixture.state)
+    }
+
+    @Test
+    fun afterRunTime_leftShouldBeOneSecondLessThanInterval() {
+        fixture.start()
+
+        whenever(clock.millis()).thenReturn(runTime)
+
+        assertEquals(State(WAITING, waitTime), fixture.state)
     }
 }

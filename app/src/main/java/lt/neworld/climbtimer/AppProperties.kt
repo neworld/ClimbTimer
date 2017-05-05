@@ -9,4 +9,8 @@ object AppProperties {
     var waitTime: Int = 30 * 1000
     var closeTheEnd: Int = 5 * 1000
     var title: String = "Climb timer"
+
+    var colorOfRunTime: Int = 0xFFFFFF
+    var colorOfWaitTime: Int = 0x00FF00
+    var colorOfCloseTheEnd: Int = 0xFF0000
 }

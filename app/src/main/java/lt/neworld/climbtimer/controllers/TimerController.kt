@@ -7,7 +7,9 @@ import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.input.KeyCode
+import javafx.scene.paint.Color
 import javafx.stage.Stage
+import lt.neworld.climbtimer.AppProperties
 import lt.neworld.climbtimer.extensions.startAnimationTimer
 import lt.neworld.climbtimer.utils.Timer
 
@@ -21,7 +23,10 @@ class TimerController {
     @FXML
     private lateinit var clock: Label
 
-    private val timer = Timer(5000)
+    private val timer = Timer(
+            runTime = AppProperties.runTime,
+            waitTime = AppProperties.waitTime
+    )
     private var animationTimer: AnimationTimer? = null
 
     private fun start() {
@@ -42,6 +47,14 @@ class TimerController {
         val sec = state.left % (1000 * 60) / 1000
         val ms = state.left % (1000) / 10
         clock.text = "%02d:%02d:%02d".format(min, sec, ms)
+
+        val color = when (state.status) {
+            Timer.Status.WAITING -> AppProperties.colorOfWaitTime
+            Timer.Status.RUNNING -> AppProperties.colorOfRunTime
+            else -> AppProperties.colorOfRunTime
+        }
+
+        clock.textFill = Color.web("#%06X".format(color))
     }
 
     companion object {
