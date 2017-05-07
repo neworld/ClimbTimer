@@ -15,4 +15,4 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-climber_timer.properties
+app/src/assets/climber_timer.properties

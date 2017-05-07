@@ -28,6 +28,15 @@ dependencies {
 
 jfx {
     mainClass = 'lt.neworld.climbtimer.Main'
+    jfxMainAppJarName = "ClimbTimer.jar"
+    additionalAppResources = "src/assets"
 
     vendor = 'neworld'
+}
+
+task jfxZip(type: Zip, dependsOn: 'jfxJar') {
+    group = 'JavaFX'
+    from 'build/jfx/app'
+    archiveName 'ClimbTimer.zip'
+    destinationDir(file('build/jfx/zip/'))
 }
