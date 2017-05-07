@@ -2,7 +2,7 @@ package lt.neworld.climbtimer.utils
 
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import lt.neworld.climbtimer.utils.Timer.State
+import lt.neworld.climbtimer.utils.Timer.Event.*
 import lt.neworld.climbtimer.utils.Timer.Status.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -21,9 +21,10 @@ class TimerTest {
 
     @Test
     fun state_statEqualsIntervalAndStopped() {
-        val status = fixture.state
+        val state = fixture.state
 
-        assertEquals(State(Timer.Status.STOPPED, runTime), status)
+        assertEquals(STOPPED, state.status)
+        assertEquals(runTime, state.left)
     }
 
     @Test
@@ -37,7 +38,9 @@ class TimerTest {
     fun start_leftShouldBeAsInterval() {
         fixture.start()
 
-        assertEquals(State(RUNNING, runTime), fixture.state)
+        val state = fixture.state
+        assertEquals(RUNNING, state.status)
+        assertEquals(runTime, state.left)
 
     }
 
@@ -47,7 +50,9 @@ class TimerTest {
 
         whenever(clock.millis()).thenReturn(1000)
 
-        assertEquals(State(RUNNING, runTime - 1000), fixture.state)
+        val state = fixture.state
+        assertEquals(RUNNING, state.status)
+        assertEquals(runTime - 1000, state.left)
     }
 
     @Test
@@ -56,7 +61,9 @@ class TimerTest {
 
         whenever(clock.millis()).thenReturn(runTime + waitTime)
 
-        assertEquals(State(RUNNING, runTime), fixture.state)
+        val state = fixture.state
+        assertEquals(RUNNING, state.status)
+        assertEquals(runTime, state.left)
     }
 
     @Test
@@ -65,7 +72,9 @@ class TimerTest {
 
         whenever(clock.millis()).thenReturn(runTime + waitTime + 1000)
 
-        assertEquals(State(RUNNING, runTime - 1000), fixture.state)
+        val state = fixture.state
+        assertEquals(RUNNING, state.status)
+        assertEquals(runTime - 1000, state.left)
     }
 
     @Test
@@ -74,7 +83,9 @@ class TimerTest {
 
         whenever(clock.millis()).thenReturn(runTime)
 
-        assertEquals(State(WAITING, waitTime), fixture.state)
+        val state = fixture.state
+        assertEquals(WAITING, state.status)
+        assertEquals(waitTime, state.left)
     }
 
     @Test
@@ -83,6 +94,97 @@ class TimerTest {
 
         whenever(clock.millis()).thenReturn(runTime - warningTime)
 
-        assertEquals(State(WARNING, warningTime), fixture.state)
+        val state = fixture.state
+        assertEquals(WARNING, state.status)
+        assertEquals(warningTime, state.left)
+    }
+
+    @Test
+    fun start_startEvent() {
+        fixture.start()
+
+        assertEquals(START, fixture.state.event)
+    }
+
+    @Test
+    fun tenSecondAfterStart_startEvent() {
+        fixture.start()
+
+        whenever(clock.millis()).thenReturn(10)
+
+        assertEquals(START, fixture.state.event)
+    }
+
+    @Test
+    fun sameTimeNextEventAfterStart_noEvent() {
+        fixture.start()
+
+        fixture.state
+
+        assertEquals(null, fixture.state.event)
+    }
+
+    @Test
+    fun MoveThroughLastMinute_lastMinuteEvent() {
+        val fixture = Timer(65_000L, 0L, 0L, clock)
+
+        fixture.start()
+
+        fixture.state.status
+        whenever(clock.millis()).thenReturn(5001)
+
+        assertEquals(LAST_MINUTE, fixture.state.event)
+    }
+
+    @Test
+    fun moveThroughOverWarningTime_lastSecondEvent() {
+        fixture.start()
+
+        whenever(clock.millis()).thenReturn(runTime - warningTime)
+        fixture.state
+        whenever(clock.millis()).thenReturn(runTime - warningTime + 1)
+
+        assertEquals(LAST_SECOND, fixture.state.event)
+    }
+
+    @Test
+    fun moveThroughLastSecond_lastSecondEvent() {
+        val fixture = Timer(65_000L, 0L, 5000L, clock)
+        fixture.start()
+
+        whenever(clock.millis()).thenReturn(63_000L)
+        fixture.state
+        whenever(clock.millis()).thenReturn(64_000L)
+
+        assertEquals(LAST_SECOND, fixture.state.event)
+    }
+
+    @Test
+    fun moveThroughTheEnd_finishEvent() {
+        fixture.start()
+
+        whenever(clock.millis()).thenReturn(runTime)
+        fixture.state
+        whenever(clock.millis()).thenReturn(runTime + 1)
+
+        assertEquals(FINISH, fixture.state.event)
+    }
+
+    @Test
+    fun moveThroughNewCycle_startEvent() {
+        fixture.start()
+
+        whenever(clock.millis()).thenReturn(runTime + warningTime - 1)
+        fixture.state
+        whenever(clock.millis()).thenReturn(runTime + warningTime)
+
+        assertEquals(START, fixture.state.event)
+    }
+
+    @Test
+    fun notStarted_noEvent() {
+        fixture.state
+
+        assertEquals(null, fixture.state.event)
     }
 }
