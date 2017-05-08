@@ -144,7 +144,7 @@ class TimerTest {
         fixture.state
         whenever(clock.millis()).thenReturn(runTime - warningTime + 1)
 
-        assertEquals(LAST_SECOND, fixture.state.event)
+        assertEquals(LAST_SECONDS, fixture.state.event)
     }
 
     @Test
@@ -156,7 +156,7 @@ class TimerTest {
         fixture.state
         whenever(clock.millis()).thenReturn(64_000L)
 
-        assertEquals(LAST_SECOND, fixture.state.event)
+        assertEquals(LAST_SECONDS, fixture.state.event)
     }
 
     @Test

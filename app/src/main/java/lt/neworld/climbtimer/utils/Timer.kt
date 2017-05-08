@@ -27,7 +27,7 @@ class Timer(
             var curTime = waitTime
             while (curTime < waitTime + warningTime) {
                 val upper = Math.min(curTime + SECOND_MS, waitTime + warningTime)
-                add(curTime..upper - 1 to Event.LAST_SECOND)
+                add(curTime..upper - 1 to Event.LAST_SECONDS)
                 curTime = upper
             }
 
@@ -101,7 +101,7 @@ class Timer(
     }
 
     enum class Event {
-        START, LAST_MINUTE, LAST_SECOND, FINISH
+        START, LAST_MINUTE, LAST_SECONDS, FINISH
     }
 
     private val LAST_MINUTE_MS = 60_000L

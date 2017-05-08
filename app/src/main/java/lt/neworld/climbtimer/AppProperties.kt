@@ -16,9 +16,15 @@ object AppProperties {
     private const val PROP_WAIT_TIME = "wait_time"
     private const val PROP_WARNING_TIME = "warning_time"
     private const val PROP_TITLE = "title"
+
     private const val PROP_COLOR_OF_RUN_TIME = "color_of_run_time"
     private const val PROP_COLOR_OF_WAIT_TIME = "color_of_wait_time"
     private const val PROP_COLOR_OF_WARNING_TIME = "color_of_warning_time"
+
+    private const val PROP_SOUND_START = "sound_start"
+    private const val PROP_SOUND_LAST_MINUTE = "sound_last_minute"
+    private const val PROP_SOUND_LAST_SECONDS = "sound_last_seconds"
+    private const val PROP_SOUND_FINISH = "sound_finish"
 
     private val file = File("climber_timer.properties")
 
@@ -49,6 +55,11 @@ object AppProperties {
     var colorOfWaitTime: Int by ColorField(PROP_COLOR_OF_WAIT_TIME, 0x00FF00)
     var colorOfWarning: Int by ColorField(PROP_COLOR_OF_WARNING_TIME, 0xFF0000)
 
+    var soundStart: File? by FileField(PROP_SOUND_START, null)
+    var soundLastMinute: File? by FileField(PROP_SOUND_LAST_MINUTE, null)
+    var soundLastSeconds: File? by FileField(PROP_SOUND_LAST_SECONDS, null)
+    var soundFinish: File? by FileField(PROP_SOUND_FINISH, null)
+
     class TimeField(key: String, default: Long) : Field<Long>(key, default) {
         override fun deserialize(raw: String): Long = raw.toLong() * 1000
 
@@ -65,6 +76,16 @@ object AppProperties {
         override fun deserialize(raw: String) = Integer.parseInt(raw, 16)
 
         override fun serialize(value: Int) = "%06X".format(value)
+    }
+
+    class FileField(key: String, default: File?) : Field<File?>(key, default) {
+        override fun deserialize(raw: String): File? {
+            return if (raw.isNotBlank()) File(raw) else null
+        }
+
+        override fun serialize(value: File?): String {
+            return value?.relativeTo(File("."))?.path ?: ""
+        }
     }
 
     abstract class Field<T>(

@@ -12,6 +12,7 @@ import javafx.scene.paint.Color
 import javafx.stage.Stage
 import lt.neworld.climbtimer.AppProperties
 import lt.neworld.climbtimer.extensions.startAnimationTimer
+import lt.neworld.climbtimer.utils.Sounds
 import lt.neworld.climbtimer.utils.Timer
 import java.net.URL
 import java.util.*
@@ -67,6 +68,13 @@ class TimerController : Initializable {
         }
 
         clock.textFill = Color.web("#%06X".format(color))
+
+        when (state.event) {
+            Timer.Event.START -> Sounds.playStart()
+            Timer.Event.LAST_MINUTE -> Sounds.playLastMinute()
+            Timer.Event.LAST_SECONDS -> Sounds.playLastSeconds()
+            Timer.Event.FINISH -> Sounds.playFinish()
+        }
     }
 
     companion object {
