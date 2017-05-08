@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
@@ -17,13 +18,23 @@
       </Label>
    </center>
    <top>
-      <Label fx:id="title" text="Montis Magia" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="96.0" />
-         </font>
-         <padding>
-            <Insets left="50.0" right="50.0" />
-         </padding>
-      </Label>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <Label fx:id="title" text="Montis Magia" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="96.0" />
+               </font>
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding>
+            </Label>
+         </center>
+         <left>
+            <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
    </top>
 </BorderPane>

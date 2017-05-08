@@ -7,6 +7,8 @@ import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
 import javafx.scene.paint.Color
 import javafx.stage.Stage
@@ -30,6 +32,9 @@ class TimerController : Initializable {
     @FXML
     private lateinit var title: Label
 
+    @FXML
+    private lateinit var logo: ImageView
+
     private val timer = Timer(
             runTime = AppProperties.runTime,
             waitTime = AppProperties.waitTime,
@@ -39,6 +44,7 @@ class TimerController : Initializable {
 
     override fun initialize(location: URL, resources: ResourceBundle?) {
         title.text = AppProperties.title
+        logo.image = AppProperties.logo?.let { Image(it.toURI().toString()) }
         showTimer()
     }
 
