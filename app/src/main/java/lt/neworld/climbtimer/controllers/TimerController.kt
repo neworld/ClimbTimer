@@ -11,6 +11,7 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
 import javafx.scene.paint.Color
+import javafx.scene.text.Font
 import javafx.stage.Stage
 import lt.neworld.climbtimer.AppProperties
 import lt.neworld.climbtimer.extensions.startAnimationTimer
@@ -60,6 +61,11 @@ class TimerController : Initializable {
         animationTimer?.stop()
     }
 
+    private fun adjustFont(relativeSize: Int) {
+        val font = clock.font
+        clock.font = Font(font.name, font.size + relativeSize)
+    }
+
     private fun showTimer() {
         val state = timer.state
         val min = state.left / (1000 * 60)
@@ -95,9 +101,9 @@ class TimerController : Initializable {
                             controller.stop()
                             (window as Stage).close()
                         }
-                        KeyCode.SPACE -> {
-                            controller.start()
-                        }
+                        KeyCode.SPACE -> controller.start()
+                        KeyCode.PLUS, KeyCode.EQUALS -> controller.adjustFont(1)
+                        KeyCode.MINUS -> controller.adjustFont(-1)
                     }
                 }
             }
