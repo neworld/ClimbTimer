@@ -26,7 +26,8 @@ object AppProperties {
     private const val PROP_SOUND_LAST_SECONDS = "sound_last_seconds"
     private const val PROP_SOUND_FINISH = "sound_finish"
 
-    private const val PROP_LOGO = "logo"
+    private const val PROP_LOGO_LEFT = "logo_left"
+    private const val PROP_LOGO_RIGHT = "logo_right"
 
     private val file = File("climber_timer.properties")
 
@@ -62,7 +63,8 @@ object AppProperties {
     var soundLastSeconds: File? by FileField(PROP_SOUND_LAST_SECONDS, null)
     var soundFinish: File? by FileField(PROP_SOUND_FINISH, null)
 
-    var logo: File? by FileField(PROP_LOGO, null)
+    var logoLeft: File? by FileField(PROP_LOGO_LEFT, null)
+    var logoRight: File? by FileField(PROP_LOGO_RIGHT, null)
 
     class TimeField(key: String, default: Long) : Field<Long>(key, default) {
         override fun deserialize(raw: String): Long = raw.toLong() * 1000

@@ -7,13 +7,13 @@ import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
-import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
 import javafx.scene.paint.Color
 import javafx.scene.text.Font
 import javafx.stage.Stage
 import lt.neworld.climbtimer.AppProperties
+import lt.neworld.climbtimer.extensions.loadImage
 import lt.neworld.climbtimer.extensions.startAnimationTimer
 import lt.neworld.climbtimer.utils.Sounds
 import lt.neworld.climbtimer.utils.Timer
@@ -34,7 +34,10 @@ class TimerController : Initializable {
     private lateinit var title: Label
 
     @FXML
-    private lateinit var logo: ImageView
+    private lateinit var logoLeft: ImageView
+
+    @FXML
+    private lateinit var logoRight: ImageView
 
     private val timer = Timer(
             runTime = AppProperties.runTime,
@@ -45,7 +48,8 @@ class TimerController : Initializable {
 
     override fun initialize(location: URL, resources: ResourceBundle?) {
         title.text = AppProperties.title
-        logo.image = AppProperties.logo?.let { Image(it.toURI().toString()) }
+        logoLeft.loadImage(AppProperties.logoLeft?.toURI())
+        logoRight.loadImage(AppProperties.logoRight?.toURI())
         showTimer()
     }
 
@@ -91,7 +95,7 @@ class TimerController : Initializable {
 
     companion object {
         fun newScene(): Scene {
-            val loader = FXMLLoader(TimerController.javaClass.getResource("timer.fxml"))
+            val loader = FXMLLoader(TimerController::class.java.getResource("timer.fxml"))
             val root: Parent = loader.load()
             val controller: TimerController = loader.getController()
             return Scene(root).apply {
