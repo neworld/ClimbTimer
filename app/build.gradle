@@ -30,6 +30,7 @@ jfx {
     mainClass = 'lt.neworld.climbtimer.Main'
     jfxMainAppJarName = "ClimbTimer.jar"
     additionalAppResources = "src/assets"
+    copyAdditionalAppResourcesToJar = true
 
     vendor = 'neworld'
 }
