@@ -70,8 +70,8 @@ class TimerController : Initializable {
         val state = timer.state
         val min = state.left / (1000 * 60)
         val sec = state.left % (1000 * 60) / 1000
-        val ms = state.left % (1000) / 10
-        clock.text = "%02d:%02d:%02d".format(min, sec, ms)
+        val ms = state.left % (1000) / 100
+        clock.text = "%02d:%02d:%d".format(min, sec, ms)
 
         val color = when (state.status) {
             Timer.Status.WAITING -> AppProperties.colorOfWaitTime

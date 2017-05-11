@@ -8,13 +8,10 @@
 
 <BorderPane style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.TimerController">
    <center>
-      <Label fx:id="clock" text="00:00:00" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+      <Label fx:id="clock" ellipsisString="" text="00:00:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" BorderPane.alignment="CENTER">
          <font>
             <Font name="Monospaced Bold" size="240.0" />
          </font>
-         <padding>
-            <Insets left="100.0" right="100.0" />
-         </padding>
       </Label>
    </center>
    <top>
