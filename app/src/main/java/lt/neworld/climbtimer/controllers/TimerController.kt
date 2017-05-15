@@ -112,5 +112,13 @@ class TimerController : Initializable {
                 }
             }
         }
+
+        fun newStage(): Stage {
+            return Stage().apply {
+                title = "Timer"
+                scene = newScene()
+                isFullScreen = true
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package lt.neworld.climbtimer
 
 import javafx.application.Application
 import javafx.stage.Stage
+import lt.neworld.climbtimer.controllers.SettingsController
 import lt.neworld.climbtimer.controllers.TimerController
 
 /**
@@ -11,8 +12,7 @@ import lt.neworld.climbtimer.controllers.TimerController
 class Main : Application() {
     override fun start(primaryStage: Stage) {
         primaryStage.title = "Climb timer"
-        primaryStage.scene = TimerController.newScene()
-        primaryStage.isFullScreen = true
+        primaryStage.scene = SettingsController.newScene()
         primaryStage.show()
     }
 }

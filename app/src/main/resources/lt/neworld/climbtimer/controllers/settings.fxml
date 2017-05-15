@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.SettingsController">
+   <bottom>
+      <HBox alignment="BOTTOM_RIGHT" fillHeight="false" BorderPane.alignment="BOTTOM_RIGHT">
+         <children>
+            <Button mnemonicParsing="false" onAction="#start" text="Start" />
+         </children>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+   </padding>
+</BorderPane>
