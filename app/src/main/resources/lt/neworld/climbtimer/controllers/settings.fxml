@@ -2,19 +2,67 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.SettingsController">
-   <bottom>
-      <HBox alignment="BOTTOM_RIGHT" fillHeight="false" BorderPane.alignment="BOTTOM_RIGHT">
-         <children>
-            <Button mnemonicParsing="false" onAction="#start" text="Start" />
-         </children>
-      </HBox>
-   </bottom>
-   <padding>
-      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
-   </padding>
+    <bottom>
+        <HBox alignment="BOTTOM_RIGHT" fillHeight="false" spacing="16.0" BorderPane.alignment="BOTTOM_RIGHT">
+            <children>
+                <Button mnemonicParsing="false" onAction="#start" text="Start" />
+            </children>
+        </HBox>
+    </bottom>
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+    </padding>
+    <center>
+        <GridPane hgap="16.0" vgap="16.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="0.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <VBox GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                    <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Running time (sec)" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                        </Label>
+                          <TextField fx:id="runningTime">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                  </TextField>
+                        <Label contentDisplay="RIGHT" text="Waiting time (sec)">
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin></Label>
+                        <TextField fx:id="waitingTime">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                  </TextField>
+                        <Label text="Warning time (sec)">
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin></Label>
+                        <TextField fx:id="warningTime" />
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="16.0" />
+            </padding>
+        </GridPane>
+    </center>
 </BorderPane>

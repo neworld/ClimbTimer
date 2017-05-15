@@ -15,6 +15,8 @@ class Main : Application() {
         primaryStage.scene = SettingsController.newScene()
         primaryStage.show()
     }
+
+
 }
 
 fun main(vararg args: String) {
