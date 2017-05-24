@@ -77,13 +77,11 @@ class TimerController : Initializable {
         val ms = state.left % (1000) / 100
         clock.text = "%02d:%02d:%d".format(min, sec, ms)
 
-        val color = when (state.status) {
+        clock.textFill = when (state.status) {
             Timer.Status.WAITING -> AppProperties.colorOfWaitTime
             Timer.Status.WARNING -> AppProperties.colorOfWarning
             else -> AppProperties.colorOfRunTime
         }
-
-        clock.textFill = Color.web("#%06X".format(color))
 
         when (state.event) {
             Timer.Event.START -> Sounds.playStart()

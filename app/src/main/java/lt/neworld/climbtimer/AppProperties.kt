@@ -1,6 +1,8 @@
 package lt.neworld.climbtimer
 
+import javafx.scene.paint.Color
 import lt.neworld.climbtimer.extensions.relativeOrAbsolute
+import lt.neworld.climbtimer.extensions.toHex
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -55,9 +57,9 @@ object AppProperties {
 
     var title: String by StringField(PROP_TITLE, "ClimbTimer")
 
-    var colorOfRunTime: Int by ColorField(PROP_COLOR_OF_RUN_TIME, 0xFFFFFF)
-    var colorOfWaitTime: Int by ColorField(PROP_COLOR_OF_WAIT_TIME, 0x00FF00)
-    var colorOfWarning: Int by ColorField(PROP_COLOR_OF_WARNING_TIME, 0xFF0000)
+    var colorOfRunTime: Color by ColorField(PROP_COLOR_OF_RUN_TIME, Color.web("FFFFFF"))
+    var colorOfWaitTime: Color by ColorField(PROP_COLOR_OF_WAIT_TIME, Color.web("00FF00"))
+    var colorOfWarning: Color by ColorField(PROP_COLOR_OF_WARNING_TIME, Color.web("FF0000"))
 
     var soundStart: File? by FileField(PROP_SOUND_START, null)
     var soundLastMinute: File? by FileField(PROP_SOUND_LAST_MINUTE, null)
@@ -79,10 +81,10 @@ object AppProperties {
         override fun serialize(value: String): String = value
     }
 
-    class ColorField(key: String, default: Int) : Field<Int>(key, default) {
-        override fun deserialize(raw: String) = Integer.parseInt(raw, 16)
+    class ColorField(key: String, default: Color) : Field<Color>(key, default) {
+        override fun deserialize(raw: String) = Color.web(raw)!!
 
-        override fun serialize(value: Int) = "%06X".format(value)
+        override fun serialize(value: Color) = value.toHex()
     }
 
     class FileField(key: String, default: File?) : Field<File?>(key, default) {

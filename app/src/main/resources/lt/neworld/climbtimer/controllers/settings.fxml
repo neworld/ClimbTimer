@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -31,6 +32,7 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
             <VBox GridPane.columnIndex="2">
@@ -135,6 +137,40 @@
                   </TextField>
                     </children>
                 </VBox>
+            <VBox GridPane.rowIndex="1">
+               <children>
+                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Default color">
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ColorPicker fx:id="colorRunTime">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                  </ColorPicker>
+                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Wait time color">
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ColorPicker fx:id="colorWaitTime">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin>
+                  </ColorPicker>
+                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Warning color">
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ColorPicker fx:id="colorWarningTime">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ColorPicker>
+               </children>
+            </VBox>
             </children>
             <padding>
                 <Insets bottom="16.0" />

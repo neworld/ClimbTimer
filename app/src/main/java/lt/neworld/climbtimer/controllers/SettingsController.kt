@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.control.ColorPicker
 import javafx.scene.control.TextField
 import javafx.scene.control.TextFormatter
 import javafx.stage.FileChooser
@@ -42,6 +43,12 @@ class SettingsController : Initializable {
     private lateinit var logoRight: TextField
     @FXML
     private lateinit var logoLeft: TextField
+    @FXML
+    private lateinit var colorRunTime: ColorPicker
+    @FXML
+    private lateinit var colorWaitTime: ColorPicker
+    @FXML
+    private lateinit var colorWarningTime: ColorPicker
 
     private val soundFileChooser = FileChooser().apply {
         extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "*.wav", "*.mp3"))
@@ -143,12 +150,20 @@ class SettingsController : Initializable {
         AppProperties.runTime = runningTime.text.toLong().secToMs()
         AppProperties.waitTime = waitingTime.text.toLong().secToMs()
         AppProperties.warningTime = warningTime.text.toLong().secToMs()
+
+        AppProperties.colorOfRunTime = colorRunTime.value
+        AppProperties.colorOfWaitTime = colorWaitTime.value
+        AppProperties.colorOfWarning = colorWarningTime.value
     }
 
     private fun load() {
         runningTime.text = AppProperties.runTime.msToSec().toString()
         waitingTime.text = AppProperties.waitTime.msToSec().toString()
         warningTime.text = AppProperties.warningTime.msToSec().toString()
+
+        colorRunTime.value = AppProperties.colorOfRunTime
+        colorWaitTime.value = AppProperties.colorOfWaitTime
+        colorWarningTime.value = AppProperties.colorOfWarning
 
         refreshSoundChoosers()
         refreshLogoChoosers()
