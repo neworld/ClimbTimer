@@ -74,7 +74,7 @@
                               <Insets bottom="4.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="soundStart" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                        <TextField fx:id="soundStart" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
                            <VBox.margin>
                               <Insets bottom="8.0" />
                            </VBox.margin>
@@ -84,7 +84,7 @@
                               <Insets bottom="4.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="soundLastMinute" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                        <TextField fx:id="soundLastMinute" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
                            <VBox.margin>
                               <Insets bottom="8.0" />
                            </VBox.margin>
@@ -94,7 +94,7 @@
                               <Insets bottom="4.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="soundLastSeconds" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                        <TextField fx:id="soundLastSeconds" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
                            <VBox.margin>
                               <Insets bottom="8.0" />
                            </VBox.margin>
@@ -104,9 +104,33 @@
                               <Insets bottom="4.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="soundFinish" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                        <TextField fx:id="soundFinish" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
                            <VBox.margin>
                               <Insets />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Left logo">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="logoLeft" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Right logo">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="logoRight" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
                            </VBox.margin>
                         </TextField>
                      </children>

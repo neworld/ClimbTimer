@@ -38,9 +38,17 @@ class SettingsController : Initializable {
     private lateinit var soundLastSeconds: TextField
     @FXML
     private lateinit var soundFinish: TextField
+    @FXML
+    private lateinit var logoRight: TextField
+    @FXML
+    private lateinit var logoLeft: TextField
 
-    private val fileChooser = FileChooser().apply {
-        extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "wav", "mp3"))
+    private val soundFileChooser = FileChooser().apply {
+        extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "*.wav", "*.mp3"))
+    }
+
+    private val logoFileChooser = FileChooser().apply {
+        extensionFilters.add(FileChooser.ExtensionFilter("Image (*.png, *.jpg, *.bmp)", "*.png", "*.jpg", "*.bmp"))
     }
 
     private val workingDir = File(".").canonicalFile
@@ -75,22 +83,43 @@ class SettingsController : Initializable {
             soundFinish -> AppProperties.soundFinish
             soundLastMinute -> AppProperties.soundLastMinute
             soundLastSeconds -> AppProperties.soundLastSeconds
-            else -> throw RuntimeException("Unsuported source ${event.source}")
+            else -> throw RuntimeException("Unsupported source ${event.source}")
         }
 
-        fileChooser.initialDirectory = initialFileName?.parentFile ?: soundsDir
+        soundFileChooser.initialDirectory = initialFileName?.parentFile ?: soundsDir
 
-        val newFile = fileChooser.showOpenDialog(window)
+        val newFile = soundFileChooser.showOpenDialog(window)
 
         when (event.source) {
             soundStart -> AppProperties.soundStart = newFile
             soundFinish -> AppProperties.soundFinish = newFile
             soundLastMinute -> AppProperties.soundLastMinute = newFile
             soundLastSeconds -> AppProperties.soundLastSeconds = newFile
-            else -> throw RuntimeException("Unsuported source ${event.source}")
+            else -> throw RuntimeException("Unsupported source ${event.source}")
         }
 
         refreshSoundChoosers()
+    }
+
+    @FXML
+    fun onLogoChooserClick(event: Event) {
+        val initialFileName = when (event.source) {
+            logoLeft -> AppProperties.logoLeft
+            logoRight -> AppProperties.logoRight
+            else -> throw RuntimeException("Unsupported source ${event.source}")
+        }
+
+        logoFileChooser.initialDirectory = initialFileName?.parentFile ?: workingDir
+
+        val newFile = logoFileChooser.showOpenDialog(window)
+
+        when (event.source) {
+            logoLeft -> AppProperties.logoLeft = newFile
+            logoRight -> AppProperties.logoRight = newFile
+            else -> throw RuntimeException("Unsupported source ${event.source}")
+        }
+
+        refreshLogoChoosers()
     }
 
     private fun refreshSoundChoosers() {
@@ -98,6 +127,11 @@ class SettingsController : Initializable {
         soundLastMinute.text = AppProperties.soundLastMinute?.path
         soundLastSeconds.text = AppProperties.soundLastSeconds?.path
         soundFinish.text = AppProperties.soundFinish?.path
+    }
+
+    private fun refreshLogoChoosers() {
+        logoLeft.text = AppProperties.logoLeft?.path
+        logoRight.text = AppProperties.logoRight?.path
     }
 
     fun start() {
@@ -117,6 +151,7 @@ class SettingsController : Initializable {
         warningTime.text = AppProperties.warningTime.msToSec().toString()
 
         refreshSoundChoosers()
+        refreshLogoChoosers()
     }
 
     companion object {
