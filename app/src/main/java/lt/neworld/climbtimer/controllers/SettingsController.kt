@@ -49,6 +49,8 @@ class SettingsController : Initializable {
     private lateinit var colorWaitTime: ColorPicker
     @FXML
     private lateinit var colorWarningTime: ColorPicker
+    @FXML
+    private lateinit var title: TextField
 
     private val soundFileChooser = FileChooser().apply {
         extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "*.wav", "*.mp3"))
@@ -154,6 +156,8 @@ class SettingsController : Initializable {
         AppProperties.colorOfRunTime = colorRunTime.value
         AppProperties.colorOfWaitTime = colorWaitTime.value
         AppProperties.colorOfWarning = colorWarningTime.value
+
+        AppProperties.title = title.text
     }
 
     private fun load() {
@@ -164,6 +168,8 @@ class SettingsController : Initializable {
         colorRunTime.value = AppProperties.colorOfRunTime
         colorWaitTime.value = AppProperties.colorOfWaitTime
         colorWarningTime.value = AppProperties.colorOfWarning
+
+        title.text = AppProperties.title
 
         refreshSoundChoosers()
         refreshLogoChoosers()
