@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.SettingsController">
+<BorderPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.SettingsController">
     <bottom>
         <HBox alignment="BOTTOM_RIGHT" fillHeight="false" spacing="16.0" BorderPane.alignment="BOTTOM_RIGHT">
             <children>
@@ -31,34 +31,88 @@
                 <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <VBox GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
-                    <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Running time (sec)" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
+            <HBox spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <children>
+                      <VBox>
+                          <children>
+                              <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Running time (sec)" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                              </Label>
+                                <TextField fx:id="runningTime" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </TextField>
+                              <Label contentDisplay="RIGHT" text="Waiting time (sec)">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
                         </Label>
-                          <TextField fx:id="runningTime">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                        <Label contentDisplay="RIGHT" text="Waiting time (sec)">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin></Label>
-                        <TextField fx:id="waitingTime">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                        <Label text="Warning time (sec)">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin></Label>
-                        <TextField fx:id="warningTime" />
-                    </children>
-                </VBox>
+                              <TextField fx:id="waitingTime" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </TextField>
+                              <Label text="Warning time (sec)">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                              <TextField fx:id="warningTime" styleClass="input">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextField>
+                          </children>
+                      </VBox>
+                  <VBox>
+                     <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Start sound">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="soundStart" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Last minute sound">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="soundLastMinute" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Last seconds sound">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="soundLastSeconds" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Finish sound">
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="soundFinish" editable="false" onAction="#onSoundChooserClick" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             </children>
             <padding>
                 <Insets bottom="16.0" />

@@ -1,5 +1,6 @@
 package lt.neworld.climbtimer.controllers
 
+import javafx.event.Event
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -7,9 +8,12 @@ import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.TextField
 import javafx.scene.control.TextFormatter
+import javafx.stage.FileChooser
+import javafx.stage.Window
 import lt.neworld.climbtimer.AppProperties
 import lt.neworld.climbtimer.extensions.msToSec
 import lt.neworld.climbtimer.extensions.secToMs
+import java.io.File
 import java.net.URL
 import java.util.*
 import java.util.function.UnaryOperator
@@ -26,6 +30,23 @@ class SettingsController : Initializable {
     private lateinit var waitingTime: TextField
     @FXML
     private lateinit var warningTime: TextField
+    @FXML
+    private lateinit var soundStart: TextField
+    @FXML
+    private lateinit var soundLastMinute: TextField
+    @FXML
+    private lateinit var soundLastSeconds: TextField
+    @FXML
+    private lateinit var soundFinish: TextField
+
+    private val fileChooser = FileChooser().apply {
+        extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "wav", "mp3"))
+    }
+
+    private val workingDir = File(".").canonicalFile
+    private val soundsDir = File(workingDir, "sounds")
+
+    private lateinit var window: Window
 
     override fun initialize(location: URL, resources: ResourceBundle?) {
         runningTime.textFormatter = createNumberFormatter()
@@ -47,6 +68,38 @@ class SettingsController : Initializable {
         })
     }
 
+    @FXML
+    fun onSoundChooserClick(event: Event) {
+        val initialFileName = when (event.source) {
+            soundStart -> AppProperties.soundStart
+            soundFinish -> AppProperties.soundFinish
+            soundLastMinute -> AppProperties.soundLastMinute
+            soundLastSeconds -> AppProperties.soundLastSeconds
+            else -> throw RuntimeException("Unsuported source ${event.source}")
+        }
+
+        fileChooser.initialDirectory = initialFileName?.parentFile ?: soundsDir
+
+        val newFile = fileChooser.showOpenDialog(window)
+
+        when (event.source) {
+            soundStart -> AppProperties.soundStart = newFile
+            soundFinish -> AppProperties.soundFinish = newFile
+            soundLastMinute -> AppProperties.soundLastMinute = newFile
+            soundLastSeconds -> AppProperties.soundLastSeconds = newFile
+            else -> throw RuntimeException("Unsuported source ${event.source}")
+        }
+
+        refreshSoundChoosers()
+    }
+
+    private fun refreshSoundChoosers() {
+        soundStart.text = AppProperties.soundStart?.path
+        soundLastMinute.text = AppProperties.soundLastMinute?.path
+        soundLastSeconds.text = AppProperties.soundLastSeconds?.path
+        soundFinish.text = AppProperties.soundFinish?.path
+    }
+
     fun start() {
         save()
         TimerController.newStage().show()
@@ -62,13 +115,16 @@ class SettingsController : Initializable {
         runningTime.text = AppProperties.runTime.msToSec().toString()
         waitingTime.text = AppProperties.waitTime.msToSec().toString()
         warningTime.text = AppProperties.warningTime.msToSec().toString()
+
+        refreshSoundChoosers()
     }
 
     companion object {
-        fun newScene(): Scene {
+        fun newScene(window: Window): Scene {
             val loader = FXMLLoader(TimerController::class.java.getResource("settings.fxml"))
             val root: Parent = loader.load()
             val controller: SettingsController = loader.getController()
+            controller.window = window
             return Scene(root)
         }
     }

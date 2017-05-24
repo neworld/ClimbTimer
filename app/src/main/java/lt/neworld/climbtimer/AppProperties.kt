@@ -1,5 +1,6 @@
 package lt.neworld.climbtimer
 
+import lt.neworld.climbtimer.extensions.relativeOrAbsolute
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -90,7 +91,7 @@ object AppProperties {
         }
 
         override fun serialize(value: File?): String {
-            return value?.relativeTo(File("."))?.path ?: ""
+            return value?.relativeOrAbsolute(File("."))?.path ?: ""
         }
     }
 
