@@ -11,8 +11,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.SettingsController">
+<BorderPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.SettingsController">
     <bottom>
         <HBox alignment="BOTTOM_RIGHT" fillHeight="false" spacing="16.0" BorderPane.alignment="BOTTOM_RIGHT">
             <children>
@@ -27,160 +29,175 @@
         <GridPane hgap="16.0" vgap="32.0" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="0.0" />
-            <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
-            <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
-            <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-            <VBox GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <children>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Left logo">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="logoLeft" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Right logo">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="logoRight" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-               </children>
-            </VBox>
-            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Start sound">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="soundStart" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Last minute sound">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="soundLastMinute" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Last seconds sound">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="soundLastSeconds" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Finish sound">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="soundFinish" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </TextField>
-               </children>
-            </VBox>
-                <VBox GridPane.columnIndex="2">
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Running time (sec)" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Start sound">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
                         </Label>
-                          <TextField fx:id="runningTime" styleClass="input">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                        <Label contentDisplay="RIGHT" text="Waiting time (sec)">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                        <TextField fx:id="waitingTime" styleClass="input">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </TextField>
-                        <Label text="Warning time (sec)">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                        <TextField fx:id="warningTime" styleClass="input">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </TextField>
+                        <TextField fx:id="soundStart" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Last minute sound">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="soundLastMinute" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Last seconds sound">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="soundLastSeconds" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Finish sound">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="soundFinish" editable="false" onMouseClicked="#onSoundChooserClick" styleClass="input">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </TextField>
                     </children>
                 </VBox>
-            <VBox GridPane.rowIndex="1">
-               <children>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Default color">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ColorPicker fx:id="colorRunTime">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </ColorPicker>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Wait time color">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ColorPicker fx:id="colorWaitTime">
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </ColorPicker>
-                  <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Warning color">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ColorPicker fx:id="colorWarningTime">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ColorPicker>
-               </children>
-            </VBox>
-            <VBox GridPane.columnSpan="2">
-               <children>
-                  <Label text="Title">
-                     <VBox.margin>
-                        <Insets bottom="4.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="title" prefHeight="27.0" prefWidth="350.0" />
-               </children>
-            </VBox>
+                <VBox GridPane.rowIndex="2">
+                    <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Running time (sec)" VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="runningTime" styleClass="input">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Label contentDisplay="RIGHT" text="Waiting time (sec)">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="waitingTime" styleClass="input">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Label text="Warning time (sec)">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="warningTime" styleClass="input">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </TextField>
+                    </children>
+                </VBox>
+                <VBox GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Default color">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ColorPicker fx:id="colorRunTime">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </ColorPicker>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Wait time color">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ColorPicker fx:id="colorWaitTime">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </ColorPicker>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Warning color">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ColorPicker fx:id="colorWarningTime">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </ColorPicker>
+                    </children>
+                </VBox>
+                <VBox GridPane.columnSpan="2">
+                    <children>
+                        <Label text="Title">
+                            <VBox.margin>
+                                <Insets bottom="4.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="title" prefHeight="27.0" prefWidth="350.0" />
+                    </children>
+                </VBox>
+                <VBox GridPane.rowIndex="1">
+                    <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Left logo (200x100)" />
+                        <TextField fx:id="logoLeft" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input" />
+                    </children>
+                </VBox>
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Right logo (200x100)">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="logoRight" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input">
+                            <VBox.margin>
+                                <Insets bottom="8.0" />
+                            </VBox.margin>
+                        </TextField>
+                    </children>
+                </VBox>
+                <VBox GridPane.columnIndex="2" GridPane.rowSpan="2">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hotkeys">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Text>
+                        <GridPane fx:id="hotkeys">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                            </columnConstraints>
+                            <VBox.margin>
+                                <Insets top="4.0" />
+                            </VBox.margin>
+                        </GridPane>
+                    </children>
+                </VBox>
             </children>
             <padding>
                 <Insets bottom="16.0" />

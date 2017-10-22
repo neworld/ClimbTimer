@@ -9,6 +9,10 @@ import javafx.scene.Scene
 import javafx.scene.control.ColorPicker
 import javafx.scene.control.TextField
 import javafx.scene.control.TextFormatter
+import javafx.scene.layout.GridPane
+import javafx.scene.layout.Region.USE_COMPUTED_SIZE
+import javafx.scene.layout.RowConstraints
+import javafx.scene.text.Text
 import javafx.stage.FileChooser
 import javafx.stage.Window
 import lt.neworld.climbtimer.AppProperties
@@ -51,6 +55,8 @@ class SettingsController : Initializable {
     private lateinit var colorWarningTime: ColorPicker
     @FXML
     private lateinit var title: TextField
+    @FXML
+    private lateinit var hotkeys: GridPane
 
     private val soundFileChooser = FileChooser().apply {
         extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "*.wav", "*.mp3"))
@@ -66,6 +72,8 @@ class SettingsController : Initializable {
     private lateinit var window: Window
 
     override fun initialize(location: URL, resources: ResourceBundle?) {
+        fillHotkeys()
+
         runningTime.textFormatter = createNumberFormatter()
         waitingTime.textFormatter = createNumberFormatter()
         warningTime.textFormatter = createNumberFormatter()
@@ -175,6 +183,17 @@ class SettingsController : Initializable {
         refreshLogoChoosers()
     }
 
+    private fun fillHotkeys() {
+        hotkeys.rowConstraints += (0 until hotkeysList.size * 2 - 1).map {
+            RowConstraints(8.0, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE)
+        }
+
+        hotkeysList.toList().zip(0 until hotkeysList.size).forEach { (pair, index) ->
+            val (key, desc) = pair
+            hotkeys.addRow(index * 2, Text(key), Text(desc))
+        }
+    }
+
     companion object {
         fun newScene(window: Window): Scene {
             val loader = FXMLLoader(TimerController::class.java.getResource("settings.fxml"))
@@ -183,5 +202,12 @@ class SettingsController : Initializable {
             controller.window = window
             return Scene(root)
         }
+
+        private val hotkeysList = mapOf(
+                "<esc>" to "close",
+                "<space>" to "launch/reset",
+                "+" to "grow timer",
+                "-" to "shrink timer"
+        )
     }
 }
