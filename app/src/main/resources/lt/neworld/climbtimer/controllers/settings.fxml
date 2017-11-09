@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -36,10 +37,11 @@
             <rowConstraints>
                 <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
                 <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                 <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <children>
                         <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Start sound">
                             <VBox.margin>
@@ -83,7 +85,7 @@
                         </TextField>
                     </children>
                 </VBox>
-                <VBox GridPane.rowIndex="2">
+                <VBox GridPane.rowIndex="3">
                     <children>
                         <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Running time (sec)" VBox.vgrow="ALWAYS">
                             <VBox.margin>
@@ -117,7 +119,7 @@
                         </TextField>
                     </children>
                 </VBox>
-                <VBox GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <VBox GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <children>
                         <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Default color">
                             <VBox.margin>
@@ -164,12 +166,15 @@
                 <VBox GridPane.rowIndex="1">
                     <children>
                         <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Left logo (200x150)" />
-                        <TextField fx:id="logoLeft" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input" />
-                  <ImageView fx:id="logoLeftView" fitHeight="132.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
+                        <TextField fx:id="logoLeft" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input">
                      <VBox.margin>
-                        <Insets top="8.0" />
-                     </VBox.margin>
-                  </ImageView>
+                        <Insets bottom="8.0" />
+                     </VBox.margin></TextField>
+                  <GridPane fx:id="logoLeftView" maxHeight="132.0" maxWidth="176.0" minHeight="132.0" minWidth="176.0" prefHeight="132.0" prefWidth="176.0">
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
                     </children>
                 </VBox>
                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -184,7 +189,11 @@
                                 <Insets bottom="8.0" />
                             </VBox.margin>
                         </TextField>
-                  <ImageView fx:id="logoRightView" fitHeight="132.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" />
+                  <GridPane fx:id="logoRightView" maxHeight="132.0" maxWidth="176.0" minHeight="132.0" minWidth="176.0" prefHeight="132.0" prefWidth="176.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
                     </children>
                 </VBox>
                 <VBox GridPane.columnIndex="2" GridPane.rowSpan="2">
@@ -205,6 +214,15 @@
                         </GridPane>
                     </children>
                 </VBox>
+            <Label prefWidth="368.0" style="-fx-border-color: #000000; -fx-padding: 4px;" text="Multiple images are supported" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/info.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
             </children>
             <padding>
                 <Insets bottom="16.0" />

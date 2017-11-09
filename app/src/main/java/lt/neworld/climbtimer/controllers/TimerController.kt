@@ -48,8 +48,8 @@ class TimerController : Initializable {
 
     override fun initialize(location: URL, resources: ResourceBundle?) {
         title.text = AppProperties.title
-        logoLeft.loadImage(AppProperties.logoLeft?.toURI())
-        logoRight.loadImage(AppProperties.logoRight?.toURI())
+        logoLeft.loadImage(AppProperties.logoLeft.firstOrNull()?.toURI())
+        logoRight.loadImage(AppProperties.logoRight.firstOrNull()?.toURI())
         showTimer()
     }
 

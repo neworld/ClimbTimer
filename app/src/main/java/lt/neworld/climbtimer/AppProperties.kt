@@ -66,8 +66,8 @@ object AppProperties {
     var soundLastSeconds: File? by FileField(PROP_SOUND_LAST_SECONDS, null)
     var soundFinish: File? by FileField(PROP_SOUND_FINISH, null)
 
-    var logoLeft: File? by FileField(PROP_LOGO_LEFT, null)
-    var logoRight: File? by FileField(PROP_LOGO_RIGHT, null)
+    var logoLeft: List<File> by FileListField(PROP_LOGO_LEFT)
+    var logoRight: List<File> by FileListField(PROP_LOGO_RIGHT)
 
     class TimeField(key: String, default: Long) : Field<Long>(key, default) {
         override fun deserialize(raw: String): Long = raw.toLong() * 1000
@@ -94,6 +94,18 @@ object AppProperties {
 
         override fun serialize(value: File?): String {
             return value?.relativeOrAbsolute(File("."))?.path ?: ""
+        }
+    }
+
+    class FileListField(key: String, default: List<File> = emptyList()) : Field<List<File>>(key, default) {
+        override fun deserialize(raw: String): List<File> {
+            if (raw.isBlank()) return default
+
+            return raw.split(File.pathSeparator).map { File(it) }
+        }
+
+        override fun serialize(value: List<File>): String {
+            return value.map { it.relativeOrAbsolute(File(".")).path }.joinToString(File.pathSeparator)
         }
     }
 

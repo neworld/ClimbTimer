@@ -9,8 +9,8 @@ import javafx.scene.Scene
 import javafx.scene.control.ColorPicker
 import javafx.scene.control.TextField
 import javafx.scene.control.TextFormatter
-import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.scene.layout.ColumnConstraints
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.Region.USE_COMPUTED_SIZE
 import javafx.scene.layout.RowConstraints
@@ -20,6 +20,7 @@ import javafx.stage.Window
 import lt.neworld.climbtimer.AppProperties
 import lt.neworld.climbtimer.extensions.loadImage
 import lt.neworld.climbtimer.extensions.msToSec
+import lt.neworld.climbtimer.extensions.partition
 import lt.neworld.climbtimer.extensions.secToMs
 import java.io.File
 import java.net.URL
@@ -61,9 +62,9 @@ class SettingsController : Initializable {
     @FXML
     private lateinit var hotkeys: GridPane
     @FXML
-    private lateinit var logoLeftView: ImageView
+    private lateinit var logoLeftView: GridPane
     @FXML
-    private lateinit var logoRightView: ImageView
+    private lateinit var logoRightView: GridPane
 
     private val soundFileChooser = FileChooser().apply {
         extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "*.wav", "*.mp3"))
@@ -131,11 +132,12 @@ class SettingsController : Initializable {
             logoLeft -> AppProperties.logoLeft
             logoRight -> AppProperties.logoRight
             else -> throw RuntimeException("Unsupported source ${event.source}")
-        }
+        }.firstOrNull()
 
         logoFileChooser.initialDirectory = initialFileName?.parentFile ?: workingDir
+        logoFileChooser.initialFileName = initialFileName?.path
 
-        val newFile = logoFileChooser.showOpenDialog(window)
+        val newFile = logoFileChooser.showOpenMultipleDialog(window)
 
         when (event.source) {
             logoLeft -> AppProperties.logoLeft = newFile
@@ -154,11 +156,19 @@ class SettingsController : Initializable {
     }
 
     private fun refreshLogoChoosers() {
-        logoLeft.text = AppProperties.logoLeft?.path
-        logoRight.text = AppProperties.logoRight?.path
+        fun makePathText(files: List<File>): String {
+            return when (files.count()) {
+                0 -> ""
+                1 -> files.first().path
+                else -> "${files.count()} files"
+            }
+        }
 
-        logoLeftView.loadImage(AppProperties.logoLeft?.toURI())
-        logoRightView.loadImage(AppProperties.logoRight?.toURI())
+        logoLeft.text = makePathText(AppProperties.logoLeft)
+        logoRight.text = makePathText(AppProperties.logoRight)
+
+        logoLeftView.fillImages(AppProperties.logoLeft)
+        logoRightView.fillImages(AppProperties.logoRight)
     }
 
     fun start() {
@@ -202,6 +212,39 @@ class SettingsController : Initializable {
             val (key, desc) = pair
             hotkeys.addRow(index * 2, Text(key), Text(desc))
         }
+    }
+
+    private fun GridPane.fillImages(images: List<File>) {
+        val size = Math.ceil(Math.sqrt(images.count().toDouble())).toInt()
+
+        children.clear()
+        rowConstraints.clear()
+        columnConstraints.clear()
+
+        rowConstraints += (0 until size).map {
+            RowConstraints().apply {
+                percentHeight = 100.0 / size
+            }
+        }
+
+        columnConstraints += (0 until size).map {
+            ColumnConstraints().apply {
+                percentWidth = 100.0 / size
+            }
+        }
+
+        images
+                .map { it.toURI() }
+                .map {
+                    ImageView().apply {
+                        loadImage(it)
+                        fitWidthProperty().bind(this@fillImages.widthProperty().divide(size))
+                        fitHeightProperty().bind(this@fillImages.heightProperty().divide(size))
+                    }
+                }
+                .partition(size)
+                .withIndex()
+                .forEach { (index, images) -> addRow(index + 0, *images.toList().toTypedArray()) }
     }
 
     companion object {
