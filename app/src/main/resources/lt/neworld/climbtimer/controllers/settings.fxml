@@ -163,7 +163,7 @@
                 </VBox>
                 <VBox GridPane.rowIndex="1">
                     <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Left logo (200x100)" />
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Left logo (200x150)" />
                         <TextField fx:id="logoLeft" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input" />
                   <ImageView fx:id="logoLeftView" fitHeight="132.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
                      <VBox.margin>
@@ -174,7 +174,7 @@
                 </VBox>
                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Right logo (200x100)">
+                        <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Right logo (200x150)">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
