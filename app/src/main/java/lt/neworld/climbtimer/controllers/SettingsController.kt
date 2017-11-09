@@ -9,6 +9,8 @@ import javafx.scene.Scene
 import javafx.scene.control.ColorPicker
 import javafx.scene.control.TextField
 import javafx.scene.control.TextFormatter
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.Region.USE_COMPUTED_SIZE
 import javafx.scene.layout.RowConstraints
@@ -16,6 +18,7 @@ import javafx.scene.text.Text
 import javafx.stage.FileChooser
 import javafx.stage.Window
 import lt.neworld.climbtimer.AppProperties
+import lt.neworld.climbtimer.extensions.loadImage
 import lt.neworld.climbtimer.extensions.msToSec
 import lt.neworld.climbtimer.extensions.secToMs
 import java.io.File
@@ -57,6 +60,10 @@ class SettingsController : Initializable {
     private lateinit var title: TextField
     @FXML
     private lateinit var hotkeys: GridPane
+    @FXML
+    private lateinit var logoLeftView: ImageView
+    @FXML
+    private lateinit var logoRightView: ImageView
 
     private val soundFileChooser = FileChooser().apply {
         extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "*.wav", "*.mp3"))
@@ -149,6 +156,9 @@ class SettingsController : Initializable {
     private fun refreshLogoChoosers() {
         logoLeft.text = AppProperties.logoLeft?.path
         logoRight.text = AppProperties.logoRight?.path
+
+        logoLeftView.loadImage(AppProperties.logoLeft?.toURI())
+        logoRightView.loadImage(AppProperties.logoRight?.toURI())
     }
 
     fun start() {

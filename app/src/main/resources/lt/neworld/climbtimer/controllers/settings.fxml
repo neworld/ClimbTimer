@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -157,13 +158,18 @@
                                 <Insets bottom="4.0" />
                             </VBox.margin>
                         </Label>
-                        <TextField fx:id="title" prefHeight="27.0" prefWidth="350.0" />
+                        <TextField fx:id="title" prefHeight="27.0" prefWidth="368.0" />
                     </children>
                 </VBox>
                 <VBox GridPane.rowIndex="1">
                     <children>
                         <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="Left logo (200x100)" />
                         <TextField fx:id="logoLeft" editable="false" onMouseClicked="#onLogoChooserClick" styleClass="input" />
+                  <ImageView fx:id="logoLeftView" fitHeight="132.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                  </ImageView>
                     </children>
                 </VBox>
                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -178,6 +184,7 @@
                                 <Insets bottom="8.0" />
                             </VBox.margin>
                         </TextField>
+                  <ImageView fx:id="logoRightView" fitHeight="132.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </VBox>
                 <VBox GridPane.columnIndex="2" GridPane.rowSpan="2">
