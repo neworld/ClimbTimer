@@ -11,6 +11,7 @@ import javafx.scene.image.Image
 import javafx.scene.input.KeyCode
 import javafx.scene.text.Font
 import javafx.stage.Stage
+import javafx.util.Duration
 import lt.neworld.climbtimer.AppProperties
 import lt.neworld.climbtimer.extensions.startAnimationTimer
 import lt.neworld.climbtimer.utils.Sounds
@@ -50,8 +51,17 @@ class TimerController : Initializable {
         fun toImage(file: File) = Image(file.toURI().toString())
 
         title.text = AppProperties.title
-        logoLeft.images = AppProperties.logoLeft.map(::toImage)
-        logoRight.images = AppProperties.logoRight.map(::toImage)
+
+        with(logoLeft) {
+            images = AppProperties.logoLeft.map(::toImage)
+            interval = Duration.millis(AppProperties.animationInterval.toDouble())
+        }
+
+        with(logoRight) {
+            images = AppProperties.logoRight.map(::toImage)
+            interval = Duration.millis(AppProperties.animationInterval.toDouble())
+        }
+
         showTimer()
     }
 

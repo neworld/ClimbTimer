@@ -1,4 +1,12 @@
-.label {
+.info {
+    -fx-border-color:  #000000;
+    -fx-padding: 4px;
 }
-.input {
+
+.tab-content {
+    -fx-padding: 16px;
+}
+
+.with-spacing {
+    -fx-spacing: 16px;
 }

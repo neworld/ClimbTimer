@@ -32,6 +32,8 @@ object AppProperties {
     private const val PROP_LOGO_LEFT = "logo_left"
     private const val PROP_LOGO_RIGHT = "logo_right"
 
+    private const val PROP_ANIMATION_INTERVAL = "animation_interval"
+
     private val file = File("climber_timer.properties")
 
     private val properties by lazy {
@@ -68,6 +70,8 @@ object AppProperties {
 
     var logoLeft: List<File> by FileListField(PROP_LOGO_LEFT)
     var logoRight: List<File> by FileListField(PROP_LOGO_RIGHT)
+
+    var animationInterval: Long by TimeField(PROP_ANIMATION_INTERVAL, 10 * 1000)
 
     class TimeField(key: String, default: Long) : Field<Long>(key, default) {
         override fun deserialize(raw: String): Long = raw.toLong() * 1000

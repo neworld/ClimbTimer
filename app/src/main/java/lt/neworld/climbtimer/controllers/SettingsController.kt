@@ -65,6 +65,8 @@ class SettingsController : Initializable {
     private lateinit var logoLeftView: GridPane
     @FXML
     private lateinit var logoRightView: GridPane
+    @FXML
+    private lateinit var animationInterval: TextField
 
     private val soundFileChooser = FileChooser().apply {
         extensionFilters.add(FileChooser.ExtensionFilter("Audio (*.wav, *.mp3)", "*.wav", "*.mp3"))
@@ -85,6 +87,7 @@ class SettingsController : Initializable {
         runningTime.textFormatter = createNumberFormatter()
         waitingTime.textFormatter = createNumberFormatter()
         warningTime.textFormatter = createNumberFormatter()
+        animationInterval.textFormatter = createNumberFormatter()
 
         load()
     }
@@ -186,6 +189,8 @@ class SettingsController : Initializable {
         AppProperties.colorOfWarning = colorWarningTime.value
 
         AppProperties.title = title.text
+
+        AppProperties.animationInterval = animationInterval.text.toLong().secToMs()
     }
 
     private fun load() {
@@ -198,6 +203,8 @@ class SettingsController : Initializable {
         colorWarningTime.value = AppProperties.colorOfWarning
 
         title.text = AppProperties.title
+
+        animationInterval.text = AppProperties.animationInterval.msToSec().toString()
 
         refreshSoundChoosers()
         refreshLogoChoosers()
