@@ -27,10 +27,18 @@ dependencies {
 }
 
 jfx {
-    mainClass = 'lt.neworld.climbtimer.Main'
+    mainClass = 'lt.neworld.climbtimer.MainKt'
     jfxMainAppJarName = "ClimbTimer.jar"
     additionalAppResources = "src/assets"
     copyAdditionalAppResourcesToJar = true
+    needShortcut = true
+    needMenu = true
+    nativeReleaseVersion = "0.4-alpha"
+    appName = "ClimbTimer"
+    identifier = "ClimbTimer"
+    bundleArguments = [
+        runtime: null
+    ]
 
     vendor = 'neworld'
 }
@@ -40,4 +48,8 @@ task jfxZip(type: Zip, dependsOn: 'jfxJar') {
     from 'build/jfx/app'
     archiveName 'ClimbTimer.zip'
     destinationDir(file('build/jfx/zip/'))
+}
+
+task dist(dependsOn: ['jfxNative', 'jfxZip']) {
+    group = "Publish"
 }
