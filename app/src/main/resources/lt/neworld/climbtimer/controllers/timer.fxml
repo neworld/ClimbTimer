@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
+<?import views.ImageSliderView?>
 <BorderPane style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.neworld.climbtimer.controllers.TimerController">
    <center>
       <Label fx:id="clock" ellipsisString="" text="00:00:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" BorderPane.alignment="CENTER">
@@ -27,10 +28,10 @@
             </Label>
          </center>
          <left>
-            <ImageView fx:id="logoLeft" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+            <ImageSliderView fx:id="logoLeft" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <ImageView fx:id="logoRight" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+            <ImageSliderView fx:id="logoRight" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </top>

@@ -7,16 +7,16 @@ import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
-import javafx.scene.image.ImageView
+import javafx.scene.image.Image
 import javafx.scene.input.KeyCode
-import javafx.scene.paint.Color
 import javafx.scene.text.Font
 import javafx.stage.Stage
 import lt.neworld.climbtimer.AppProperties
-import lt.neworld.climbtimer.extensions.loadImage
 import lt.neworld.climbtimer.extensions.startAnimationTimer
 import lt.neworld.climbtimer.utils.Sounds
 import lt.neworld.climbtimer.utils.Timer
+import views.ImageSliderView
+import java.io.File
 import java.net.URL
 import java.util.*
 
@@ -34,10 +34,10 @@ class TimerController : Initializable {
     private lateinit var title: Label
 
     @FXML
-    private lateinit var logoLeft: ImageView
+    private lateinit var logoLeft: ImageSliderView
 
     @FXML
-    private lateinit var logoRight: ImageView
+    private lateinit var logoRight: ImageSliderView
 
     private val timer = Timer(
             runTime = AppProperties.runTime,
@@ -47,11 +47,14 @@ class TimerController : Initializable {
     private var animationTimer: AnimationTimer? = null
 
     override fun initialize(location: URL, resources: ResourceBundle?) {
+        fun toImage(file: File) = Image(file.toURI().toString())
+
         title.text = AppProperties.title
-        logoLeft.loadImage(AppProperties.logoLeft.firstOrNull()?.toURI())
-        logoRight.loadImage(AppProperties.logoRight.firstOrNull()?.toURI())
+        logoLeft.images = AppProperties.logoLeft.map(::toImage)
+        logoRight.images = AppProperties.logoRight.map(::toImage)
         showTimer()
     }
+
 
     private fun start() {
         stop()
